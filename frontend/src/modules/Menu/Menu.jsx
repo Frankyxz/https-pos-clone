@@ -82,16 +82,6 @@ const Menu = ({ authrztn }) => {
     hour12: true,
   });
 
-  const handleFetchProfile = async () => {
-    const res = await axios.get(`${BASE_URL}/store_profile/fetchProfile`);
-    setStoreName(res.data.store_name || "ELI");
-  };
-
-  const handleFetchStatus = async () => {
-    const res = await axios.get(`${BASE_URL}/store_profile/fetchStatus`);
-    setStoreStatus(res.data.status);
-  };
-
   const decodeToken = () => {
     var token = localStorage.getItem("accessToken");
     if (typeof token === "string") {
@@ -153,12 +143,6 @@ const Menu = ({ authrztn }) => {
       })
       .catch((err) => console.log(err));
   };
-
-  useEffect(() => {
-    handleFetchProfile();
-    handleFetchStatus();
-    decodeToken();
-  }, []);
 
   const getFirstAuthorizedPath = (authrztn, navItems) => {
     for (let item of navItems) {

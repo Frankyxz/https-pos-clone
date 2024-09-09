@@ -274,16 +274,6 @@ const Login = () => {
       });
   };
 
-  const handleFetchProfile = async () => {
-    const res = await axios.get(`${BASE_URL}/store_profile/fetchProfile`);
-    setStoreName(res.data.store_name || "ELI");
-    setStorePhoto(res.data.image);
-  };
-
-  useEffect(() => {
-    handleFetchProfile();
-  }, []);
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };

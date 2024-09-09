@@ -1,2 +1,2 @@
-const BASE_URL = "https://env-2503369.user.edgecloudph.com:3306";
+const BASE_URL = "http://localhost:8084";
 export default BASE_URL;
