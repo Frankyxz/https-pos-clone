@@ -1,11 +1,11 @@
 const { Sequelize } = require("sequelize");
 
 const sequelize = new Sequelize({
-  host: "180.232.110.128",
-  database: "eli_pos",
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
   dialect: "mysql",
-  username: "root",
-  password: "GALhcq52131",
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASS,
   timezone: "+08:00",
   alter: false,
 });
