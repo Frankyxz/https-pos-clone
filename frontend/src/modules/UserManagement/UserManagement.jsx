@@ -68,7 +68,7 @@ function UserManagement({ authrztn }) {
   const log = (message) => {
     setLogs((prevLogs) => [...prevLogs, message]);
   };
-
+  /* global NDEFReader */
   const handleScan = async () => {
     log("User clicked scan button");
 
@@ -78,6 +78,7 @@ function UserManagement({ authrztn }) {
     }
 
     try {
+      // eslint-disable-next-line no-undef
       const ndef = new NDEFReader();
       await ndef.scan();
       log("> Scan started");
