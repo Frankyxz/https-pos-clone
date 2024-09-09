@@ -14,13 +14,13 @@ const options = {
   cert: fs.readFileSync("./certificate/cert.pem"),
 };
 
-app.use(
-  cors({
-    origin: "https://https-pos-clone.vercel.app",
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
+// app.use(
+//   cors({
+//     origin: "https://https-pos-clone.vercel.app",
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
+app.use(cors());
 app.use(express.json({ limit: "500mb" }));
 
 app.use(
@@ -33,23 +33,23 @@ app.use(
 
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header(
-    "Access-Control-Allow-Origin",
-    "https://https-pos-clone.vercel.app"
-  );
+// app.use((req, res, next) => {
+//   res.header(
+//     "Access-Control-Allow-Origin",
+//     "https://https-pos-clone.vercel.app"
+//   );
 
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+//   );
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
 
 //Routes:
 
