@@ -16,7 +16,7 @@ const options = {
 
 app.use(
   cors({
-    origin: "http://localhost:3006",
+    origin: "https://https-pos-clone.vercel.app",
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
@@ -34,7 +34,10 @@ app.use(
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3006");
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://https-pos-clone.vercel.app"
+  );
 
   res.header(
     "Access-Control-Allow-Methods",
