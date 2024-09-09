@@ -30,7 +30,7 @@ function UserManagement({ authrztn }) {
   const [email, setEmail] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
-  const [rfid, setRfid] = useState("");
+  const [rfid, setRfid] = useState([]);
 
   const [status, setStatus] = useState(false);
   const [validity, setValidity] = useState("");
@@ -60,6 +60,47 @@ function UserManagement({ authrztn }) {
   const [categoryFilter, setCategoryFilter] = useState("");
   const [file, setFile] = useState("");
   const fileRef = useRef();
+
+  ////////////////////////////////////////////
+
+  const [serial, setSerial] = useState("");
+  const [logs, setLogs] = useState([]);
+  const log = (message) => {
+    setLogs((prevLogs) => [...prevLogs, message]);
+  };
+
+  const handleScan = async () => {
+    log("User clicked scan button");
+
+    try {
+      const ndef = new NDEFReader();
+      await ndef.scan();
+      log("> Scan started");
+
+      ndef.addEventListener("readingerror", () => {
+        log("Argh! Cannot read data from the NFC tag. Try another one?");
+      });
+
+      ndef.addEventListener("reading", ({ message, serialNumber }) => {
+        log(`> Serial Number: ${serialNumber}`);
+        log(`> Records: (${message.records.length})`);
+
+        setSerial(serialNumber);
+        const encoder = new TextEncoder();
+        const byteArr = encoder.encode(serialNumber);
+        setRfid(byteArr);
+      });
+    } catch (error) {
+      log("Argh! " + error);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    handleScan();
+  }, []);
+
+  ///////////////////////////////////////////
 
   const handleStatusFilterChange = (e) => {
     setStatusFilter(e.target.value);
@@ -814,6 +855,20 @@ function UserManagement({ authrztn }) {
                   </button>
                 </div>
               )}
+
+              <div>
+                <h3>Logs</h3>
+                <ul>
+                  {logs.map((log, index) => (
+                    <li key={index}>{log}</li>
+                  ))}
+                </ul>
+              </div>
+              {/* <button onClick={handleScan}>Start NFC Scan</button> */}
+              <h2>Serial {serial}</h2>
+
+              {/* <h2>init {init}</h2>
+      <h2>err: {err}</h2> */}
             </div>
             <div className="btn-manage-container d-flex justify-content-between">
               <div class="input-group">
@@ -989,7 +1044,7 @@ function UserManagement({ authrztn }) {
                         RFID # <span style={{ color: "red" }}>*</span>
                       </label>
                       <div class="input-group mb-3">
-                        <input
+                        {/* <input
                           type="text"
                           required
                           class="form-control search"
@@ -997,6 +1052,12 @@ function UserManagement({ authrztn }) {
                           aria-describedby="basic-addon1"
                           value={rfid}
                           onChange={(e) => setRfid(e.target.value)}
+                        /> */}
+
+                        <input
+                          type="text"
+                          class="form-control search"
+                          value={rfid.join("")}
                         />
                       </div>
                     </div>
