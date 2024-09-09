@@ -97,7 +97,7 @@ function UserManagement({ authrztn }) {
   };
 
   useEffect(() => {
-    handleScan();
+    // handleScan();
   }, []);
 
   ///////////////////////////////////////////
@@ -843,7 +843,7 @@ function UserManagement({ authrztn }) {
               <h2>Customer List Management</h2>
               {authrztn.includes("CustomerList-IE") && (
                 <div className="download-container">
-                  <button type="button" onClick={handleDownloadTemplate}>
+                  <button type="button" onClick={handleScan}>
                     Download Template
                   </button>
                   <button
