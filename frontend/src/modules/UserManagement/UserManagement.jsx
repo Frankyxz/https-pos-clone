@@ -103,7 +103,7 @@ function UserManagement({ authrztn }) {
   };
 
   useEffect(() => {
-    handleScan();
+    // handleScan();
   }, []);
 
   ///////////////////////////////////////////
@@ -870,6 +870,8 @@ function UserManagement({ authrztn }) {
               </div>
               {/* <button onClick={handleScan}>Start NFC Scan</button> */}
               <h2>Serial {serial}</h2>
+
+              <button onClick={handleScan}>SCAAAAAAAAAAAN</button>
 
               {/* <h2>init {init}</h2>
       <h2>err: {err}</h2> */}
