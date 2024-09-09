@@ -72,6 +72,11 @@ function UserManagement({ authrztn }) {
   const handleScan = async () => {
     log("User clicked scan button");
 
+    if (!("NDEFReader" in window)) {
+      log("NFC not supported on this device or browser.");
+      return;
+    }
+
     try {
       const ndef = new NDEFReader();
       await ndef.scan();
