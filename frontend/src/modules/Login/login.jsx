@@ -316,7 +316,61 @@ const Login = () => {
   return (
     <>
       <div className="login-container ">
-        <div className="details-container"></div>
+        <div className="details-container">
+          <div className="input-container">
+            <form onSubmit={handleLogin}>
+              <div className="email-container">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  className="input"
+                  name="username"
+                  onChange={(e) => setUsername(e.target.value)}
+                  maxLength={50} // Set the character limit to 50 characters
+                  required
+                />
+              </div>
+              <div className="pass-container">
+                <label htmlFor="email">Password</label>
+                <div className="pass-input p-0 d-flex flex-row">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="input"
+                    name="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    maxLength={50} // Set the character limit to 50 characters
+                    required
+                  />
+                  <span className="eye-icon">
+                    {showPassword ? (
+                      <EyeSlash
+                        size={24}
+                        color="#1a1a1a"
+                        weight="light"
+                        onClick={togglePasswordVisibility}
+                      />
+                    ) : (
+                      <Eye
+                        size={24}
+                        color="#1a1a1a"
+                        weight="light"
+                        onClick={togglePasswordVisibility}
+                      />
+                    )}
+                  </span>
+                </div>
+              </div>
+              {error && <div className="error fs-5">{error}</div>}
+              <button type="submit" className="btn-sign" id="loginSubmit">
+                Sign in
+              </button>
+
+              <p className="forgot" onClick={() => setShowForgotModal(true)}>
+                Forgot Password?
+              </p>
+            </form>
+          </div>
+        </div>
       </div>
 
       {/* Modals For Forgot Password */}
